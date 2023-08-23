@@ -4,7 +4,7 @@ from flask import Blueprint, send_from_directory, render_template, request
 
 
 def get_swaggerui_blueprint(
-    base_url, api_url, config=None, oauth_config=None, blueprint_name="swagger_ui"
+    base_url, api_url, config=None, oauth_config=None, blueprint_name="swagger_ui", template_path="index.template.html"
 ):
 
     swagger_ui = Blueprint(
@@ -49,7 +49,7 @@ def get_swaggerui_blueprint(
                     }
                 )
                 fields["config_json"] = json.dumps(default_config)
-            return render_template("index.template.html", **fields)
+            return render_template(template_path, **fields)
         else:
             return send_from_directory(
                 # A bit of a hack to not pollute the default /static path with our files.
